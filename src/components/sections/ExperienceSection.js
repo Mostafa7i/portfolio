@@ -20,10 +20,10 @@ export default function ExperienceSection() {
     d('exp.r4', 'Created practical, real-world project assignments and assessments'),
     d('exp.r5', 'Supervised student graduation projects end-to-end'),
     d('exp.r6', 'Built CodaX platform to manage training operations efficiently'),
-    d('exp.r7', 'Trained 500+ students with a 95%+ satisfaction rate'),
+    d('exp.r7', 'Trained 1000+ students with a 95%+ satisfaction rate'),
   ]
 
-  const achievements = [d('exp.a1', '500+ students trained'), d('exp.a2', '15+ graduation projects supervised'), d('exp.a3', '95% satisfaction rate')]
+  const achievements = [d('exp.a1', '1000+ students trained'), d('exp.a2', '15+ graduation projects supervised'), d('exp.a3', '95% satisfaction rate')]
 
   return (
     <section id="experience" className="section-wrapper" style={{ position: 'relative' }}>

@@ -30,8 +30,8 @@ export default function StatsSection() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
 
   const stats = [
-    { value: 3,   label: d('stats.experience', 'Years of Experience'),             suffix: '+', icon: '⚡', from: '#2563EB', to: '#60a5fa' },
-    { value: 500, label: d('stats.students',   'Students Taught'),                 suffix: '+', icon: '🎓', from: '#14B8A6', to: '#5eead4' },
+    { value: 4,   label: d('stats.experience', 'Years of Experience'),             suffix: '+', icon: '⚡', from: '#2563EB', to: '#60a5fa' },
+    { value: 1000, label: d('stats.students',   'Students Taught'),                 suffix: '+', icon: '🎓', from: '#14B8A6', to: '#5eead4' },
     { value: 20,  label: d('stats.projects',   'Projects Built'),                  suffix: '+', icon: '🚀', from: '#F59E0B', to: '#fcd34d' },
     { value: 30,  label: d('stats.technologies','Technologies Used'),              suffix: '+', icon: '🛠️', from: '#8b5cf6', to: '#c4b5fd' },
     { value: 15,  label: d('stats.graduation', 'Graduation Projects Supervised'),  suffix: '+', icon: '🏆', from: '#ef4444', to: '#fca5a5' },

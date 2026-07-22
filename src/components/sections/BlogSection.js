@@ -43,8 +43,8 @@ export default function BlogSection() {
     },
     {
       id: 4,
-      title: d('blog.p4.title', 'Teaching Programming: Lessons from 500+ Students'),
-      excerpt: d('blog.p4.excerpt', "What I've learned after training 500+ developers — the mistakes beginners make, and how instructors can help them grow faster."),
+      title: d('blog.p4.title', 'Teaching Programming: Lessons from 1000+ Students'),
+      excerpt: d('blog.p4.excerpt', "What I've learned after training 1000+ developers — the mistakes beginners make, and how instructors can help them grow faster."),
       category: d('blog.p4.category', 'Education'),
       readTime: d('blog.p4.readTime', '10 min'),
       emoji: '🎓', from: '#8b5cf6', to: '#ec4899',

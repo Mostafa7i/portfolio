@@ -10,17 +10,17 @@ const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior:
 
 export default function Navbar() {
   const { dict, lang } = useDict()
-  const [open, setOpen]         = useState(false)
+  const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [active, setActive]     = useState('')
+  const [active, setActive] = useState('')
 
   const navLinks = [
-    { href: 'about',      label: dict['nav.about']      || 'About' },
-    { href: 'skills',     label: dict['nav.skills']     || 'Skills' },
-    { href: 'projects',   label: dict['nav.projects']   || 'Projects' },
+    { href: 'about', label: dict['nav.about'] || 'About' },
+    { href: 'skills', label: dict['nav.skills'] || 'Skills' },
+    { href: 'projects', label: dict['nav.projects'] || 'Projects' },
     { href: 'experience', label: dict['nav.experience'] || 'Experience' },
-    { href: 'blog',       label: dict['nav.blog']       || 'Blog' },
-    { href: 'contact',    label: dict['nav.contact']    || 'Contact' },
+    { href: 'blog', label: dict['nav.blog'] || 'Blog' },
+    { href: 'contact', label: dict['nav.contact'] || 'Contact' },
   ]
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Navbar() {
             <FiCode color="#fff" size={17} />
           </div>
           <span style={{ fontWeight: 800, fontSize: '1.1rem', color: '#f1f5f9' }}>
-            Mustafa<span className="gradient-text">.</span>
+            Mostafa<span className="gradient-text">.</span>
           </span>
         </motion.button>
 
