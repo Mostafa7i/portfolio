@@ -1,0 +1,509 @@
+@import 'tailwindcss';
+
+/* ============================================
+   DESIGN TOKENS
+============================================ */
+:root {
+  --bg: #0F172A;
+  --surface: #1E293B;
+  --surface-2: #0f1f35;
+  --border: #334155;
+  --primary: #2563EB;
+  --secondary: #14B8A6;
+  --accent: #F59E0B;
+  --text: #E2E8F0;
+  --muted: #94A3B8;
+}
+
+@layer base {
+  /* ============================================
+     BASE RESET
+  ============================================ */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  section {
+    scroll-margin-top: 80px;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: rgba(37, 99, 235, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  :focus-visible {
+    outline: 2px solid #2563EB;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* ============================================
+     FONT UTILITIES
+  ============================================ */
+  .font-sans {
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  }
+
+  .font-arabic {
+    font-family: var(--font-arabic), 'Segoe UI', Tahoma, sans-serif;
+    font-feature-settings: 'kern' 1;
+  }
+
+  /* ============================================
+     RTL / LTR SUPPORT
+  ============================================ */
+  [dir="rtl"] {
+    text-align: right;
+  }
+
+  [dir="ltr"] {
+    text-align: left;
+  }
+
+  /* RTL-aware margin/padding helpers */
+  [dir="rtl"] .container {
+    direction: rtl;
+  }
+
+  /* Flip gradient-text for RTL */
+  [dir="rtl"] .gradient-text {
+    background: linear-gradient(135deg, #14B8A6 0%, #2563EB 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* RTL: flip horizontal animations */
+  [dir="rtl"] .section-divider {
+    margin: 0 auto;
+  }
+
+  /* RTL: hero section text alignment */
+  [dir="rtl"] .hero-section .container {
+    direction: rtl;
+  }
+
+  /* RTL: card hover shadow direction */
+  [dir="rtl"] .card {
+    text-align: right;
+  }
+
+  /* RTL: flip skill bar direction */
+  [dir="rtl"] .skill-bar-track {
+    transform: scaleX(-1);
+  }
+
+  /* ============================================
+     TYPOGRAPHY HELPERS
+  ============================================ */
+  .gradient-text {
+    background: linear-gradient(135deg, #2563EB 0%, #14B8A6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-warm {
+    background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ============================================
+     GLASS EFFECT
+  ============================================ */
+  .glass {
+    background: rgba(30, 41, 59, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+  }
+
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(51, 65, 85, 0.4);
+  }
+
+  /* ============================================
+     LAYOUT UTILITIES
+  ============================================ */
+  .section-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-wrapper {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
+
+  .container {
+    width: 100%;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* ============================================
+     SCROLL PROGRESS
+  ============================================ */
+  #scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #2563EB, #14B8A6, #F59E0B);
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* ============================================
+     SECTION DIVIDER
+  ============================================ */
+  .section-label {
+    display: inline-block;
+    color: #60a5fa;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #f1f5f9;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-divider {
+    width: 3.5rem;
+    height: 3px;
+    background: linear-gradient(90deg, #2563EB, #14B8A6);
+    border-radius: 9999px;
+    margin: 0 auto;
+  }
+
+  /* ============================================
+     CARD COMPONENT
+  ============================================ */
+  .card {
+    background: rgba(30, 41, 59, 0.55);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(37, 99, 235, 0.3);
+  }
+
+  /* ============================================
+     BADGE / TECH TAG
+  ============================================ */
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    color: #93c5fd;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .tech-badge:hover {
+    background: rgba(37, 99, 235, 0.22);
+  }
+
+  /* ============================================
+     BUTTON VARIANTS
+  ============================================ */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    background: linear-gradient(135deg, #2563EB, #1d4ed8);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.35);
+  }
+
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-primary:active { transform: scale(0.97); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    background: rgba(30, 41, 59, 0.55);
+    backdrop-filter: blur(12px);
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(51, 65, 85, 0.6);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(37, 99, 235, 0.5);
+    color: #fff;
+    background: rgba(37, 99, 235, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .btn-teal {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    background: transparent;
+    color: #2dd4bf;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(20, 184, 166, 0.35);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-teal:hover {
+    background: rgba(20, 184, 166, 0.1);
+    border-color: rgba(20, 184, 166, 0.6);
+    transform: translateY(-1px);
+  }
+
+  /* ============================================
+     GLOW EFFECTS
+  ============================================ */
+  .glow-blue { box-shadow: 0 0 25px rgba(37, 99, 235, 0.35); }
+  .glow-teal { box-shadow: 0 0 25px rgba(20, 184, 166, 0.35); }
+
+  /* ============================================
+     GRID PATTERN BACKGROUND
+  ============================================ */
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ============================================
+     HERO SPECIFIC
+  ============================================ */
+  .hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0F172A 0%, #0f1f35 40%, #0d1525 100%);
+  }
+
+  .hero-orb-1 {
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: float1 8s ease-in-out infinite;
+  }
+
+  .hero-orb-2 {
+    position: absolute;
+    bottom: 15%;
+    right: 15%;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(20,184,166,0.12) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: float2 10s ease-in-out infinite;
+  }
+
+  .hero-orb-3 {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
+    filter: blur(30px);
+    pointer-events: none;
+    animation: float1 12s ease-in-out infinite reverse;
+  }
+
+  @keyframes float1 {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    33% { transform: translateY(-20px) translateX(10px); }
+    66% { transform: translateY(10px) translateX(-8px); }
+  }
+
+  @keyframes float2 {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    40% { transform: translateY(15px) translateX(-12px); }
+    70% { transform: translateY(-10px) translateX(8px); }
+  }
+
+  /* ============================================
+     TIMELINE
+  ============================================ */
+  .timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 1.5rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563EB, #14B8A6);
+    border: 2px solid #0F172A;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.3);
+    z-index: 10;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(37,99,235,0.5), rgba(20,184,166,0.3));
+  }
+
+  /* ============================================
+     TYPING CURSOR
+  ============================================ */
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  /* ============================================
+     SKILL BAR
+  ============================================ */
+  .skill-bar-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(51, 65, 85, 0.6);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  /* ============================================
+     STAR RATING
+  ============================================ */
+  .star { color: #F59E0B; }
+
+  /* ============================================
+     ANIMATED BORDER GRADIENT (avatar ring)
+  ============================================ */
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .avatar-ring-outer { animation: spin-slow 18s linear infinite; }
+  .avatar-ring-inner { animation: spin-slow 12s linear infinite reverse; }
+
+  /* ============================================
+     PULSE AVAILABILITY DOT
+  ============================================ */
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.7; }
+  }
+  .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+  /* ============================================
+     SPINNER (contact form)
+  ============================================ */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ============================================
+     LINE CLAMP UTILITIES
+  ============================================ */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+    
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
