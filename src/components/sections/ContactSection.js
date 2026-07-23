@@ -8,10 +8,10 @@ import { FaWhatsapp } from 'react-icons/fa'
 import { useDict } from '@/context/DictionaryContext'
 
 const socials = [
-  { icon: FiGithub,   href: 'https://github.com/Mostafa7i',              label: 'GitHub',    color: '#e2e8f0' },
-  { icon: FiLinkedin, href: 'https://linkedin.com/in/mustafa-mahmoud', label: 'LinkedIn',  color: '#60a5fa' },
-  { icon: FaWhatsapp, href: 'https://wa.me/201000000000',              label: 'WhatsApp',  color: '#4ade80' },
-  { icon: FiMail,     href: 'mailto:mustafa@example.com',              label: 'Email',     color: '#fbbf24' },
+  { icon: FiGithub,   href: 'https://github.com/Mostafa7i',                       label: 'GitHub',    color: '#e2e8f0' },
+  { icon: FiLinkedin, href: 'https://linkedin.com/in/mostafa-mahmoud-dev',         label: 'LinkedIn',  color: '#60a5fa' },
+  { icon: FaWhatsapp, href: 'https://wa.me/201551440272',                          label: 'WhatsApp',  color: '#4ade80' },
+  { icon: FiMail,     href: 'mailto:mostafa.mahmouud7i@gmail.com',                 label: 'Email',     color: '#fbbf24' },
 ]
 
 const inputStyle = {
@@ -47,13 +47,43 @@ export default function ContactSection() {
 
   const onChange = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }))
 
+  /*
+   * ── CONTACT FORM ─────────────────────────────────────────────────────────
+   * Uses Formspree (free tier: 50 msgs/month).
+   * Steps to activate:
+   *   1. Go to https://formspree.io and create a free account.
+   *   2. Create a new form — copy your Form ID (looks like: xkgnwrqb).
+   *   3. Replace YOUR_FORM_ID below with your actual Form ID.
+   * ─────────────────────────────────────────────────────────────────────────
+   */
+  const FORMSPREE_ID = 'https://formspree.io/f/mdknbgol'
+
   const onSubmit = async (e) => {
     e.preventDefault()
     setStatus('loading')
-    await new Promise((r) => setTimeout(r, 1600))
-    setStatus('success')
-    setForm({ name: '', email: '', subject: '', message: '' })
-    setTimeout(() => setStatus('idle'), 4000)
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setForm({ name: '', email: '', subject: '', message: '' })
+        setTimeout(() => setStatus('idle'), 5000)
+      } else {
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 4000)
+      }
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 4000)
+    }
   }
 
   return (
@@ -88,8 +118,8 @@ export default function ContactSection() {
                 <h3 style={{ color: '#f1f5f9', fontWeight: 700, fontSize: '1rem', marginBottom: '1.25rem' }}>{d('contact.info.title', 'Get In Touch')}</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   {[
-                    { icon: FiMail, label: d('contact.email.label', 'Email'), val: 'mustafa@example.com', href: 'mailto:mustafa@example.com', iconColor: '#60a5fa', iconBg: 'rgba(37,99,235,0.12)', iconBorder: 'rgba(37,99,235,0.22)' },
-                    { icon: FaWhatsapp, label: d('contact.whatsapp.label', 'WhatsApp'), val: d('contact.whatsapp.val', 'Available for quick chat'), href: 'https://wa.me/201000000000', iconColor: '#4ade80', iconBg: 'rgba(74,222,128,0.1)', iconBorder: 'rgba(74,222,128,0.2)' },
+                    { icon: FiMail,     label: d('contact.email.label', 'Email'),     val: 'mostafa.mahmouud7i@gmail.com',  href: 'mailto:mostafa.mahmouud7i@gmail.com', iconColor: '#60a5fa', iconBg: 'rgba(37,99,235,0.12)', iconBorder: 'rgba(37,99,235,0.22)' },
+                    { icon: FaWhatsapp, label: d('contact.whatsapp.label', 'WhatsApp'), val: d('contact.whatsapp.val', 'Available for quick chat'), href: 'https://wa.me/201551440272', iconColor: '#4ade80', iconBg: 'rgba(74,222,128,0.1)', iconBorder: 'rgba(74,222,128,0.2)' },
                   ].map(({ icon: Icon, label, val, href, iconColor, iconBg, iconBorder }) => (
                     <div key={label} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem' }}>
                       <div style={{ width: 36, height: 36, borderRadius: '0.65rem', background: iconBg, border: `1px solid ${iconBorder}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>

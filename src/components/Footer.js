@@ -6,10 +6,10 @@ import { FaWhatsapp } from 'react-icons/fa'
 import { useDict } from '@/context/DictionaryContext'
 
 const socials = [
-  { icon: FiGithub,   href: 'https://github.com/Mostafa7i',              label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://linkedin.com/in/mustafa-mahmoud', label: 'LinkedIn' },
-  { icon: FaWhatsapp, href: 'https://wa.me/201000000000',              label: 'WhatsApp' },
-  { icon: FiMail,     href: 'mailto:mustafa@example.com',              label: 'Email' },
+  { icon: FiGithub,   href: 'https://github.com/Mostafa7i',                   label: 'GitHub' },
+  { icon: FiLinkedin, href: 'https://linkedin.com/in/mostafa-mahmoud-dev',     label: 'LinkedIn' },
+  { icon: FaWhatsapp, href: 'https://wa.me/201551440272',                      label: 'WhatsApp' },
+  { icon: FiMail,     href: 'mailto:mostafa.mahmouud7i@gmail.com',             label: 'Email' },
 ]
 
 export default function Footer() {
@@ -21,7 +21,6 @@ export default function Footer() {
     { href: '#skills',     label: d('nav.skills', 'Skills') },
     { href: '#projects',   label: d('nav.projects', 'Projects') },
     { href: '#experience', label: d('nav.experience', 'Experience') },
-    { href: '#blog',       label: d('nav.blog', 'Blog') },
     { href: '#contact',    label: d('nav.contact', 'Contact') },
   ]
 
@@ -76,7 +75,7 @@ export default function Footer() {
                 </motion.a>
               ))}
             </div>
-            <p style={{ color: '#475569', fontSize: '0.82rem' }}>mustafa@example.com</p>
+            <p style={{ color: '#475569', fontSize: '0.82rem' }}>mostafa.mahmouud7i@gmail.com</p>
           </div>
         </div>
 

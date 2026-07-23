@@ -6,11 +6,6 @@ import { useInView } from 'react-intersection-observer'
 import { FiExternalLink, FiGithub, FiX, FiCheck } from 'react-icons/fi'
 import { useDict } from '@/context/DictionaryContext'
 
-// ========================================================
-// 🚀 DEVELOPER INSTRUCTIONS / تعليمات للمطور
-// Customize your project links below (githubUrl & demoUrl):
-// يمكنك تعديل روابط المشاريع (رابط الكود ورابط المعاينة) من هنا مباشرة:
-// ========================================================
 const projects = [
   {
     id: 1,
@@ -31,7 +26,6 @@ const projects = [
     challengeArKey: 'تصميم نظام RBAC قابل للتوسع يستوعب أنواعاً متعددة من المستخدمين بمستويات صلاحيات مختلفة مع الحفاظ على هندسة نظيفة.',
     metrics: ['+500 مستخدم / 500+ users', '3 أدوار / 3 Roles', 'AI مدمج / AI Integrated'],
     
-    // 👇 PROJECT 1 LINKS / روابط المشروع الأول
     githubUrl: 'https://github.com/Mostafa7i/codax',
     demoUrl: 'https://github.com/Mostafa7i/codax'
   },
@@ -54,7 +48,6 @@ const projects = [
     challengeArKey: 'تنفيذ تدفقات بيانات في الوقت الفعلي من مصادر أبراج متعددة وبناء نموذج تنبؤ موثوق للذكاء الاصطناعي.',
     metrics: ['تنبيهات فورية / Alerts', 'توقعات AI / Prediction', 'خرائط تفاعلية / Maps'],
     
-    // 👇 PROJECT 2 LINKS / روابط المشروع الثاني
     githubUrl: 'https://github.com/Mostafa7i',
     demoUrl: 'https://github.com/Mostafa7i'
   },
@@ -77,7 +70,6 @@ const projects = [
     challengeArKey: 'بناء لوحة متصدرين في الوقت الفعلي تتحدث فوراً لجميع العملاء دون تدهور في الأداء مع زيادة عدد الطلاب.',
     metrics: ['+500 طالب / 500+ Students', 'مزامنة فورية / Real-time sync', 'متعدد المجموعات'],
     
-    // 👇 PROJECT 3 LINKS / روابط المشروع الثالث
     githubUrl: 'https://github.com/Mostafa7i/codax',
     demoUrl: 'https://codax-dev.web.app/'
   },

@@ -7,7 +7,7 @@ import SkillsSection from '@/components/sections/SkillsSection'
 import ProjectsSection from '@/components/sections/ProjectsSection'
 import ExperienceSection from '@/components/sections/ExperienceSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
-import BlogSection from '@/components/sections/BlogSection'
+
 import ContactSection from '@/components/sections/ContactSection'
 
 export default async function HomePage({ params }) {
@@ -23,7 +23,7 @@ export default async function HomePage({ params }) {
       <ProjectsSection />
       <ExperienceSection />
       <TestimonialsSection />
-      <BlogSection />
+
       <ContactSection />
     </>
   )

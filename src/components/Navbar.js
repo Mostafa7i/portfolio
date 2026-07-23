@@ -19,7 +19,6 @@ export default function Navbar() {
     { href: 'skills', label: dict['nav.skills'] || 'Skills' },
     { href: 'projects', label: dict['nav.projects'] || 'Projects' },
     { href: 'experience', label: dict['nav.experience'] || 'Experience' },
-    { href: 'blog', label: dict['nav.blog'] || 'Blog' },
     { href: 'contact', label: dict['nav.contact'] || 'Contact' },
   ]
 
@@ -107,9 +106,11 @@ export default function Navbar() {
           {/* Language Switcher */}
           <LanguageSwitcher />
 
+          {/* ⚠️ Place your CV at /public/resume.pdf to enable this button */}
           <motion.a
             href="/resume.pdf"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-primary"
             style={{ marginInlineStart: '0.65rem', padding: '0.5rem 1.15rem', fontSize: '0.85rem', textDecoration: 'none' }}
             whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
@@ -162,7 +163,7 @@ export default function Navbar() {
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.5rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(51,65,85,0.3)' }}>
                 <LanguageSwitcher mobile />
-                <a href="/resume.pdf" download className="btn-primary" style={{ fontSize: '0.83rem', textDecoration: 'none' }}>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: '0.83rem', textDecoration: 'none' }}>
                   {dict['nav.resume'] || 'Resume'}
                 </a>
               </div>
