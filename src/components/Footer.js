@@ -7,7 +7,7 @@ import { useDict } from '@/context/DictionaryContext'
 
 const socials = [
   { icon: FiGithub,   href: 'https://github.com/Mostafa7i',                   label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://linkedin.com/in/mostafa-mahmoud-dev',     label: 'LinkedIn' },
+  { icon: FiLinkedin, href: 'https://linkedin.com/in/mostafa',     label: 'LinkedIn' },
   { icon: FaWhatsapp, href: 'https://wa.me/201551440272',                      label: 'WhatsApp' },
   { icon: FiMail,     href: 'mailto:mostafa.mahmouud7i@gmail.com',             label: 'Email' },
 ]
