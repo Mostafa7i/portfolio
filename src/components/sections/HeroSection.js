@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { FiArrowDown, FiDownload, FiMail, FiGithub, FiLinkedin } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 import { useDict } from '@/context/DictionaryContext'
-
+import BlurText from "../BlurText";
 const rolesEn = ['Full Stack Developer', 'MERN Stack Engineer', 'JavaScript Instructor', 'Technical Trainer']
 const rolesAr = ['مطور Full Stack', 'مهندس MERN Stack', 'مدرّس JavaScript', 'مدرّب تقني']
 
@@ -179,25 +179,48 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            {/* Main headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+            {/* Main headline with BlurText effect */}
+            <h1
               style={{
                 fontSize: 'clamp(2.2rem, 5vw, 4rem)',
                 fontWeight: 800,
                 color: '#f1f5f9',
-                lineHeight: 1.15,
+                lineHeight: 1.25,
                 marginBottom: '1rem',
               }}
             >
-              {d('hero.headline1', 'Building Scalable')}{' '}
-              <span className="gradient-text">{d('hero.headline2', 'Web Apps')}</span>
+              <BlurText
+                text={d('hero.headline1', 'Building Scalable')}
+                delay={50}
+                animateBy="words"
+                direction="top"
+                as="span"
+              />{' '}
+              <BlurText
+                text={d('hero.headline2', 'Web Apps')}
+                delay={50}
+                animateBy="words"
+                direction="top"
+                as="span"
+                className="gradient-text"
+              />
               <br />
-              {d('hero.headline3', '& Empowering')}{' '}
-              <span style={{ color: '#2dd4bf' }}>{d('hero.headline4', 'Developers')}</span>
-            </motion.h1>
+              <BlurText
+                text={d('hero.headline3', '& Empowering')}
+                delay={50}
+                animateBy="words"
+                direction="top"
+                as="span"
+              />{' '}
+              <BlurText
+                text={d('hero.headline4', 'Developers')}
+                delay={50}
+                animateBy="words"
+                direction="top"
+                as="span"
+                style={{ color: '#2dd4bf' }}
+              />
+            </h1>
 
             {/* Typing role */}
             <motion.div
@@ -330,7 +353,7 @@ export default function HeroSection() {
                   <motion.img
                     initial={{ opacity: 0, scale: 0.85 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.9, duration: 0.7 }} 
+                    transition={{ delay: 0.9, duration: 0.7 }}
                     src='/me.png' className="rounded-full hover:scale-105 hover:transition-all w-60 h-60 md:w-80 md:h-80 object-cover" />
                 </span>
               </div>

@@ -10,27 +10,27 @@ const categories = [
   {
     id: 'frontend', icon: FiMonitor, color: '#2563EB', light: '#60a5fa',
     skills: [
-      { name: 'HTML5', level: 95 }, { name: 'CSS3', level: 90 }, { name: 'JavaScript', level: 92 },
-      { name: 'TypeScript', level: 78 }, { name: 'React', level: 90 }, { name: 'Next.js', level: 82 },
-      { name: 'Tailwind CSS', level: 88 }, { name: 'Bootstrap', level: 85 },
+      { name: 'HTML5', level: 98 }, { name: 'CSS3', level: 95 }, { name: 'JavaScript', level: 92 },
+      { name: 'TypeScript', level: 78 }, { name: 'React', level: 90 }, { name: 'Next.js', level: 85 },
+      { name: 'Tailwind CSS', level: 90 }, { name: 'Bootstrap', level: 80 },
     ],
   },
   {
     id: 'backend', icon: FiServer, color: '#14B8A6', light: '#5eead4',
     skills: [
-      { name: 'Node.js', level: 88 }, { name: 'Express.js', level: 86 }, { name: 'REST APIs', level: 90 },
+      { name: 'Node.js', level: 90 }, { name: 'Express.js', level: 86 }, { name: 'REST APIs', level: 90 },
       { name: 'JWT Auth', level: 85 }, { name: 'RBAC', level: 80 },
     ],
   },
   {
     id: 'database', icon: FiDatabase, color: '#F59E0B', light: '#fcd34d',
-    skills: [{ name: 'MongoDB', level: 88 }, { name: 'Mongoose', level: 85 }, { name: 'Firebase', level: 72 }],
+    skills: [{ name: 'MongoDB', level: 88 }, { name: 'Mongoose', level: 85 }, { name: 'Firebase', level: 80 }],
   },
   {
     id: 'tools', icon: FiTool, color: '#8b5cf6', light: '#c4b5fd',
     skills: [
       { name: 'Git & GitHub', level: 90 }, { name: 'Vercel', level: 85 }, { name: 'Cloudinary', level: 80 },
-      { name: 'Postman', level: 88 }, { name: 'Figma', level: 70 }, { name: 'Docker (Learning)', level: 45 },
+      { name: 'Postman', level: 88 }, { name: 'Figma', level: 70 }, { name: 'Docker', level: 55 },
     ],
   },
 ]

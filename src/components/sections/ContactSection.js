@@ -47,15 +47,6 @@ export default function ContactSection() {
 
   const onChange = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }))
 
-  /*
-   * ── CONTACT FORM ─────────────────────────────────────────────────────────
-   * Uses Formspree (free tier: 50 msgs/month).
-   * Steps to activate:
-   *   1. Go to https://formspree.io and create a free account.
-   *   2. Create a new form — copy your Form ID (looks like: xkgnwrqb).
-   *   3. Replace YOUR_FORM_ID below with your actual Form ID.
-   * ─────────────────────────────────────────────────────────────────────────
-   */
   const FORMSPREE_ID = 'https://formspree.io/f/mdknbgol'
 
   const onSubmit = async (e) => {

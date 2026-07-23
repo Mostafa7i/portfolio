@@ -35,7 +35,7 @@ export default function Footer() {
               <div style={{ width: 34, height: 34, borderRadius: '0.55rem', background: 'linear-gradient(135deg,#2563EB,#14B8A6)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <FiCode color="#fff" size={15} />
               </div>
-              <span style={{ fontWeight: 800, fontSize: '1rem', color: '#f1f5f9' }}>Mustafa<span className="gradient-text">.</span></span>
+              <span style={{ fontWeight: 800, fontSize: '1rem', color: '#f1f5f9' }}>Mostafa<span className="gradient-text">.</span></span>
             </div>
             <p style={{ color: '#475569', fontSize: '0.83rem', lineHeight: 1.7, maxWidth: 240 }}>
               {d('footer.tagline', 'Full Stack Developer specializing in MERN Stack.')}
@@ -82,11 +82,11 @@ export default function Footer() {
         {/* Bottom bar */}
         <div style={{ borderTop: '1px solid rgba(51,65,85,0.4)', paddingTop: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', justifyContent: 'space-between' }}>
           <p style={{ color: '#334155', fontSize: '0.8rem' }}>
-            © {new Date().getFullYear()} Mustafa Mahmoud. {d('footer.rights', 'All rights reserved.')}
+            © {new Date().getFullYear()} Mostafa Mahmoud. {d('footer.rights', 'All rights reserved.')}
           </p>
           <p style={{ color: '#334155', fontSize: '0.8rem' }}>
             {d('footer.built', 'Designed & Developed by')}{' '}
-            <span className="gradient-text" style={{ fontWeight: 600 }}>Mustafa Mahmoud</span>
+            <span className="gradient-text" style={{ fontWeight: 600 }}>Mostafa Mahmoud</span>
           </p>
         </div>
       </div>
