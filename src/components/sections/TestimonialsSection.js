@@ -133,9 +133,10 @@ export default function TestimonialsSection() {
 
   const thumbsRef      = useRef(null)
   const activeThumbRef = useRef(null)
+  const hasMounted     = useRef(false)   
 
-  /* Auto-scroll thumbnail strip to keep active thumb centred */
   useEffect(() => {
+    if (!hasMounted.current) { hasMounted.current = true; return }
     if (activeThumbRef.current) {
       activeThumbRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
     }
