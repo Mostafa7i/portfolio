@@ -1,11 +1,9 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FiCode, FiUsers, FiBookOpen, FiAward, FiZap } from 'react-icons/fi'
 import { useDict } from '@/context/DictionaryContext'
-import Lightfall from '../Lightfall'
 
 const stack = ['React', 'Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Firebase', 'TypeScript', 'Tailwind CSS', 'JWT', 'REST APIs', 'AI Integration']
 
@@ -17,20 +15,6 @@ export default function AboutSection() {
   const d = (k, fb) => dict[k] || fb
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.08 })
 
-  // Track whether the section is on-screen to pause the WebGL loop when not visible
-  const sectionRef = useRef(null)
-  const [isVisible, setIsVisible] = useState(false)
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
   const highlights = [
     { icon: FiCode, title: d('about.highlight1.title', 'Full Stack Developer'), desc: d('about.highlight1.desc', 'Specializing in MERN Stack') },
     { icon: FiBookOpen, title: d('about.highlight2.title', 'JavaScript Instructor'), desc: d('about.highlight2.desc', 'Technical Trainer since 2023') },
@@ -39,44 +23,7 @@ export default function AboutSection() {
   ]
 
   return (
-    <section ref={sectionRef} id="about" className="section-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Lightfall absolute background */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-        <Lightfall
-          colors={['#A6C8FF', '#5227FF', '#FF9FFC']}
-          backgroundColor="#0A29FF"
-          speed={0.5}
-          streakCount={2}
-          streakWidth={1}
-          streakLength={1}
-          glow={1}
-          density={0.6}
-          twinkle={1}
-          zoom={3}
-          backgroundGlow={0.5}
-          opacity={1}
-          mouseInteraction
-          mouseStrength={0.5}
-          mouseRadius={1}
-          paused={!isVisible}
-          color1="#A6C8FF"
-          color2="#5227FF"
-          color3="#FF9FFC"
-        />
-        {/* Top smooth fade to blend with Hero section */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: '160px',
-          background: 'linear-gradient(to bottom, #0F172A 0%, rgba(15, 23, 42, 0.8) 30%, transparent 100%)',
-          zIndex: 1
-        }} />
-        {/* Bottom smooth fade to blend with Stats section */}
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: '160px',
-          background: 'linear-gradient(to top, #0F172A 0%, rgba(15, 23, 42, 0.8) 30%, transparent 100%)',
-          zIndex: 1
-        }} />
-      </div>
-
+    <section id="about" className="section-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
       <div className="grid-pattern" style={{ position: 'absolute', inset: 0, opacity: 0.25, pointerEvents: 'none', zIndex: 1 }} aria-hidden="true" />
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <motion.div ref={ref} variants={containerV} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
@@ -95,6 +42,7 @@ export default function AboutSection() {
             </h2>
             <div className="section-divider" />
           </motion.div>
+
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'start' }}>
             {/* Story */}
