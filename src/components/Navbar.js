@@ -6,7 +6,12 @@ import { FiMenu, FiX, FiCode } from 'react-icons/fi'
 import { useDict } from '@/context/DictionaryContext'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
-const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+const scrollTo = (id) => {
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+}
 
 // Link IDs are static — defined once at module scope
 const NAV_IDS = ['about', 'skills', 'projects', 'experience', 'contact']
@@ -41,12 +46,18 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    // No lang dep — the handler doesn't use lang
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [onScroll])
 
-  const handleNav = useCallback((id) => { setOpen(false); scrollTo(id) }, [])
+  const handleNav = useCallback((id) => {
+    setOpen(false)
+    // Delay scroll slightly on mobile so closing menu layout shift doesn't cancel smooth scroll
+    setTimeout(() => {
+      scrollTo(id)
+    }, 100)
+  }, [])
+
 
   return (
     <motion.header
