@@ -113,18 +113,25 @@ export default function SkillsSection() {
   const [visibleCount, setVisibleCount] = useState(4)
 
   useEffect(() => {
+    let debounceId
     const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setVisibleCount(1)
-      } else if (window.innerWidth < 1024) {
-        setVisibleCount(2)
-      } else {
-        setVisibleCount(4)
-      }
+      clearTimeout(debounceId)
+      debounceId = setTimeout(() => {
+        if (window.innerWidth < 640) {
+          setVisibleCount(1)
+        } else if (window.innerWidth < 1024) {
+          setVisibleCount(2)
+        } else {
+          setVisibleCount(4)
+        }
+      }, 150)
     }
     handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
+    return () => {
+      clearTimeout(debounceId)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   useEffect(() => {

@@ -1,11 +1,13 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { FiArrowDown, FiDownload, FiMail, FiGithub, FiLinkedin } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 import { useDict } from '@/context/DictionaryContext'
-import BlurText from "../BlurText";
+import BlurText from '../BlurText'
+
 const rolesEn = ['Full Stack Developer', 'MERN Stack Engineer', 'JavaScript Instructor', 'Technical Trainer']
 const rolesAr = ['مطور Full Stack', 'مهندس MERN Stack', 'مدرّس JavaScript', 'مدرّب تقني']
 
@@ -18,13 +20,14 @@ function ParticleField() {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     let animId
+    let running = true
 
     const resize = () => {
       canvas.width = canvas.offsetWidth
       canvas.height = canvas.offsetHeight
     }
     resize()
-    window.addEventListener('resize', resize)
+    window.addEventListener('resize', resize, { passive: true })
 
     const particles = Array.from({ length: 60 }, () => ({
       x: Math.random() * canvas.width,
@@ -36,6 +39,7 @@ function ParticleField() {
     }))
 
     function draw() {
+      if (!running) return
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       particles.forEach((p) => {
         p.x += p.dx; p.y += p.dy
@@ -63,8 +67,28 @@ function ParticleField() {
       }
       animId = requestAnimationFrame(draw)
     }
-    draw()
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
+
+    // Pause the loop when the canvas is off-screen — saves ~60fps GPU work
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          running = true
+          draw()
+        } else {
+          running = false
+          cancelAnimationFrame(animId)
+        }
+      },
+      { threshold: 0 }
+    )
+    observer.observe(canvas)
+
+    return () => {
+      running = false
+      cancelAnimationFrame(animId)
+      window.removeEventListener('resize', resize)
+      observer.disconnect()
+    }
   }, [])
 
   return (
@@ -116,17 +140,22 @@ function TypingText({ lang }) {
 
 /* ── Social links data ───────────────────────────────────────── */
 const socials = [
-  { icon: FiGithub, href: 'https://github.com/Mostafa7i', label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://linkedin.com/in/mostafa', label: 'LinkedIn' },
-  { icon: FaWhatsapp, href: 'https://wa.me/201551440272', label: 'WhatsApp' },
-  { icon: FiMail, href: 'mailto:mostafa.mahmouud7i@gmail.com', label: 'Email' },
+  { icon: FiGithub,   href: 'https://github.com/Mostafa7i',           label: 'GitHub' },
+  { icon: FiLinkedin, href: 'https://linkedin.com/in/mostafa',        label: 'LinkedIn' },
+  { icon: FaWhatsapp, href: 'https://wa.me/201551440272',             label: 'WhatsApp' },
+  { icon: FiMail,     href: 'mailto:mostafa.mahmouud7i@gmail.com',    label: 'Email' },
 ]
 
 /* ── Main Component ──────────────────────────────────────────── */
 export default function HeroSection() {
   const { dict, lang } = useDict()
   const d = (k, fb) => dict[k] || fb
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+
+  // Stable callback — doesn't recreate on every render
+  const scrollTo = useCallback(
+    (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }),
+    []
+  )
 
   return (
     <section
@@ -347,22 +376,29 @@ export default function HeroSection() {
                   border: '1px solid rgba(37,99,235,0.4)',
                 }}
               >
-                <span
-                  className="gradient-text text-6xl font-bold select-none"
+                {/* next/image replaces bare <img> — priority LCP image, proper sizing */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.9, duration: 0.7 }}
+                  style={{ position: 'relative', width: '100%', height: '100%' }}
                 >
-                  <motion.img
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.9, duration: 0.7 }}
-                    src='/me.png' className="rounded-full hover:scale-105 hover:transition-all w-60 h-60 md:w-80 md:h-80 object-cover" />
-                </span>
+                  <Image
+                    src="/me.webp"
+                    alt="Mustafa Mahmoud"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 240px, 310px"
+                    className="rounded-full object-cover hover:scale-105 hover:transition-all"
+                  />
+                </motion.div>
               </div>
 
               {/* Floating tags */}
               {[
-                { labelKey: 'hero.tag.mern', label: '⚡ MERN Stack', top: 16, right: 16, animY: -8 },
-                { labelKey: 'hero.tag.instructor', label: '🎓 Instructor', top: 150, left: 6, animY: 8 },
-                { labelKey: 'hero.tag.ai', label: '🚀 AI-Ready', top: '50%', right: -52, animX: 6 },
+                { labelKey: 'hero.tag.mern',       label: '⚡ MERN Stack', top: 16,    right: 16,  animY: -8 },
+                { labelKey: 'hero.tag.instructor',  label: '🎓 Instructor', top: 150,   left: 6,    animY: 8  },
+                { labelKey: 'hero.tag.ai',          label: '🚀 AI-Ready',   top: '50%', right: -52, animX: 6  },
               ].map(({ labelKey, label, animY = 0, animX = 0, ...pos }) => (
                 <motion.div
                   key={label}

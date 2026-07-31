@@ -71,11 +71,16 @@ const BlurText = ({
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
+  // Build keyframes ONCE outside the map — all spans share the same animation keyframes
+  const animateKeyframes = useMemo(
+    () => buildKeyframes(fromSnapshot, toSnapshots),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [fromSnapshot, toSnapshots]
+  );
+
   return (
     <Component ref={ref} className={className} style={{ display: 'inline-flex', flexWrap: 'wrap', ...style }}>
       {elements.map((segment, index) => {
-        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
-
         const spanTransition = {
           duration: totalDuration,
           times,

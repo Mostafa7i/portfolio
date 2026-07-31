@@ -171,34 +171,22 @@ export default function ContactSection() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                   <div>
                     <label htmlFor="c-name" style={labelStyle}>{d('contact.form.name', 'Your Name')} *</label>
-                    <input id="c-name" name="name" type="text" required placeholder={d('contact.form.name.placeholder', 'Mustafa Mahmoud')} value={form.name} onChange={onChange} style={inputStyle}
-                      onFocus={(e) => { e.target.style.borderColor = 'rgba(37,99,235,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(37,99,235,0.1)' }}
-                      onBlur={(e) => { e.target.style.borderColor = 'rgba(51,65,85,0.6)'; e.target.style.boxShadow = 'none' }}
-                    />
+                    <input id="c-name" name="name" type="text" required placeholder={d('contact.form.name.placeholder', 'Mustafa Mahmoud')} value={form.name} onChange={onChange} style={inputStyle} />
                   </div>
                   <div>
                     <label htmlFor="c-email" style={labelStyle}>{d('contact.form.email', 'Email Address')} *</label>
-                    <input id="c-email" name="email" type="email" required placeholder={d('contact.form.email.placeholder', 'you@example.com')} value={form.email} onChange={onChange} style={inputStyle}
-                      onFocus={(e) => { e.target.style.borderColor = 'rgba(37,99,235,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(37,99,235,0.1)' }}
-                      onBlur={(e) => { e.target.style.borderColor = 'rgba(51,65,85,0.6)'; e.target.style.boxShadow = 'none' }}
-                    />
+                    <input id="c-email" name="email" type="email" required placeholder={d('contact.form.email.placeholder', 'you@example.com')} value={form.email} onChange={onChange} style={inputStyle} />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="c-subject" style={labelStyle}>{d('contact.form.subject', 'Subject')}</label>
-                  <input id="c-subject" name="subject" type="text" placeholder={d('contact.form.subject.placeholder', 'Project inquiry / Training partnership...')} value={form.subject} onChange={onChange} style={inputStyle}
-                    onFocus={(e) => { e.target.style.borderColor = 'rgba(37,99,235,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(37,99,235,0.1)' }}
-                    onBlur={(e) => { e.target.style.borderColor = 'rgba(51,65,85,0.6)'; e.target.style.boxShadow = 'none' }}
-                  />
+                  <input id="c-subject" name="subject" type="text" placeholder={d('contact.form.subject.placeholder', 'Project inquiry / Training partnership...')} value={form.subject} onChange={onChange} style={inputStyle} />
                 </div>
 
                 <div>
                   <label htmlFor="c-message" style={labelStyle}>{d('contact.form.message', 'Message')} *</label>
-                  <textarea id="c-message" name="message" required rows={5} placeholder={d('contact.form.message.placeholder', 'Tell me about your project or how I can help...')} value={form.message} onChange={onChange} style={{ ...inputStyle, resize: 'none' }}
-                    onFocus={(e) => { e.target.style.borderColor = 'rgba(37,99,235,0.6)'; e.target.style.boxShadow = '0 0 0 3px rgba(37,99,235,0.1)' }}
-                    onBlur={(e) => { e.target.style.borderColor = 'rgba(51,65,85,0.6)'; e.target.style.boxShadow = 'none' }}
-                  />
+                  <textarea id="c-message" name="message" required rows={5} placeholder={d('contact.form.message.placeholder', 'Tell me about your project or how I can help...')} value={form.message} onChange={onChange} style={{ ...inputStyle, resize: 'none' }} />
                 </div>
 
                 {/* Status */}

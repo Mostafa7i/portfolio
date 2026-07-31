@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FiExternalLink, FiGithub, FiX, FiCheck } from 'react-icons/fi'
@@ -253,6 +253,9 @@ export default function ProjectsSection() {
   const [selected, setSelected] = useState(null)
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 })
 
+  const isAr = lang === 'ar'
+  const handleCloseModal = useCallback(() => setSelected(null), [])
+
   return (
     <section id="projects" className="section-wrapper">
       {/* Background Gradient & Grid */}
@@ -281,7 +284,6 @@ export default function ProjectsSection() {
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => {
-              const isAr = lang === 'ar'
               const title = isAr ? project.titleArKey : project.titleKey
               const category = isAr ? project.categoryArKey : project.categoryKey
               const desc = isAr ? project.descArKey : project.descKey
@@ -437,7 +439,7 @@ export default function ProjectsSection() {
         {selected && (
           <ProjectModal 
             project={selected} 
-            onClose={() => setSelected(null)} 
+            onClose={handleCloseModal} 
             dict={dict} 
             lang={lang} 
           />
@@ -446,3 +448,4 @@ export default function ProjectsSection() {
     </section>
   )
 }
+

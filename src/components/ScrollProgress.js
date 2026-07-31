@@ -1,15 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function ScrollProgress() {
-  const [progress, setProgress] = useState(0)
+  const barRef = useRef(null)
 
   useEffect(() => {
+    const bar = barRef.current
+    if (!bar) return
+
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
-      const scrolled = (window.scrollY / totalHeight) * 100
-      setProgress(scrolled)
+      const totalHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight
+      const scrolled = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0
+      // Directly mutate DOM — no React re-render triggered
+      bar.style.width = `${scrolled}%`
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -18,8 +24,9 @@ export default function ScrollProgress() {
 
   return (
     <div
+      ref={barRef}
       id="scroll-progress"
-      style={{ width: `${progress}%` }}
+      style={{ width: '0%' }}
       aria-hidden="true"
     />
   )

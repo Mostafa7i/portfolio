@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FiCode, FiUsers, FiBookOpen, FiAward, FiZap } from 'react-icons/fi'
@@ -16,6 +17,20 @@ export default function AboutSection() {
   const d = (k, fb) => dict[k] || fb
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.08 })
 
+  // Track whether the section is on-screen to pause the WebGL loop when not visible
+  const sectionRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   const highlights = [
     { icon: FiCode, title: d('about.highlight1.title', 'Full Stack Developer'), desc: d('about.highlight1.desc', 'Specializing in MERN Stack') },
     { icon: FiBookOpen, title: d('about.highlight2.title', 'JavaScript Instructor'), desc: d('about.highlight2.desc', 'Technical Trainer since 2023') },
@@ -24,7 +39,7 @@ export default function AboutSection() {
   ]
 
   return (
-    <section id="about" className="section-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
+    <section ref={sectionRef} id="about" className="section-wrapper" style={{ position: 'relative', overflow: 'hidden' }}>
       {/* Lightfall absolute background */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <Lightfall
@@ -43,6 +58,7 @@ export default function AboutSection() {
           mouseInteraction
           mouseStrength={0.5}
           mouseRadius={1}
+          paused={!isVisible}
           color1="#A6C8FF"
           color2="#5227FF"
           color3="#FF9FFC"

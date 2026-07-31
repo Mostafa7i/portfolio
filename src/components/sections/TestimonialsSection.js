@@ -55,6 +55,35 @@ const slideVariants = {
   exit: (dir) => ({ x: dir > 0 ? -80 : 80, opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } }),
 }
 
+/* ─── NavBtn — defined at module scope so React never remounts it ──────────── */
+function NavBtn({ onClick, ariaLabel, children, side }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label={ariaLabel}
+      style={{
+        position: 'absolute',
+        top: '50%', transform: 'translateY(-50%)',
+        [side]: 14,
+        zIndex: 6,
+        width: 40, height: 40,
+        borderRadius: '50%',
+        background: 'rgba(10, 16, 30, 0.01)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        color: '#fff',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'pointer',
+        backdropFilter: 'blur(1px)',
+        transition: 'background 0.2s',
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(37,100,235,0.19)' }}
+      onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(10,16,30,0.01)' }}
+    >
+      {children}
+    </button>
+  )
+}
+
 /* ─── Fullscreen Overlay ───────────────────────────────────────────────────── */
 function FullscreenOverlay({ src, onClose }) {
   useEffect(() => {
@@ -168,35 +197,7 @@ export default function TestimonialsSection() {
     return () => window.removeEventListener('keydown', onKey)
   }, [prev, next, fullscreen])
 
-  /* ─── NavButton helper ─── */
-  const NavBtn = ({ onClick, ariaLabel, children, side }) => {
-    const [h, setH] = useState(false)
-    return (
-      <button
-        onClick={onClick}
-        aria-label={ariaLabel}
-        onMouseEnter={() => setH(true)}
-        onMouseLeave={() => setH(false)}
-        style={{
-          position: 'absolute',
-          top: '50%', transform: 'translateY(-50%)',
-          [side]: 14,
-          zIndex: 6,
-          width: 40, height: 40,
-          borderRadius: '50%',
-          background: h ? 'rgba(37, 100, 235, 0.19)' : 'rgba(10, 16, 30, 0.01)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          color: '#fff',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer',
-          backdropFilter: 'blur(1px)',
-          transition: 'all 0.2s',
-        }}
-      >
-        {children}
-      </button>
-    )
-  }
+  /* NavBtn is defined at module scope — see below the component */
 
   return (
     <section id="testimonials" className="section-wrapper" style={{ position: 'relative' }}>
@@ -425,6 +426,8 @@ export default function TestimonialsSection() {
                       src={src}
                       alt=""
                       aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
                     />
                   </button>

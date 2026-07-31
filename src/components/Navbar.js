@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX, FiCode } from 'react-icons/fi'
 import { useDict } from '@/context/DictionaryContext'
@@ -8,35 +8,45 @@ import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
+// Link IDs are static — defined once at module scope
+const NAV_IDS = ['about', 'skills', 'projects', 'experience', 'contact']
+// Reversed for active-section detection (bottom-up sweep)
+const NAV_IDS_REVERSED = [...NAV_IDS].reverse()
+
 export default function Navbar() {
   const { dict, lang } = useDict()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState('')
 
-  const navLinks = [
-    { href: 'about', label: dict['nav.about'] || 'About' },
-    { href: 'skills', label: dict['nav.skills'] || 'Skills' },
-    { href: 'projects', label: dict['nav.projects'] || 'Projects' },
+  // Labels depend on dict/lang — recomputed only when those change
+  const navLinks = useMemo(() => [
+    { href: 'about',      label: dict['nav.about']      || 'About' },
+    { href: 'skills',     label: dict['nav.skills']     || 'Skills' },
+    { href: 'projects',   label: dict['nav.projects']   || 'Projects' },
     { href: 'experience', label: dict['nav.experience'] || 'Experience' },
-    { href: 'contact', label: dict['nav.contact'] || 'Contact' },
-  ]
+    { href: 'contact',    label: dict['nav.contact']    || 'Contact' },
+  ], [dict])
+
+  const onScroll = useCallback(() => {
+    setScrolled(window.scrollY > 24)
+    for (const id of NAV_IDS_REVERSED) {
+      const el = document.getElementById(id)
+      if (el && el.getBoundingClientRect().top <= 110) {
+        setActive(id)
+        return
+      }
+    }
+    setActive('')
+  }, [])
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 24)
-      const reversed = [...navLinks].reverse()
-      for (const { href } of reversed) {
-        const el = document.getElementById(href)
-        if (el && el.getBoundingClientRect().top <= 110) { setActive(href); return }
-      }
-      setActive('')
-    }
+    // No lang dep — the handler doesn't use lang
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [lang])
+  }, [onScroll])
 
-  const handleNav = (id) => { setOpen(false); scrollTo(id) }
+  const handleNav = useCallback((id) => { setOpen(false); scrollTo(id) }, [])
 
   return (
     <motion.header

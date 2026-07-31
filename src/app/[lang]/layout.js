@@ -11,7 +11,7 @@ import '../globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const ibmArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-arabic',
   display: 'swap',
 })
@@ -93,12 +93,13 @@ export default async function LocaleLayout({ children, params }) {
         <DictionaryProvider dict={dict} lang={lang}>
           <Providers>
             <ScrollProgress />
-            <Navbar lang={lang} dict={dict} />
+            <Navbar />
             <main>{children}</main>
-            <Footer lang={lang} dict={dict} />
+            <Footer />
           </Providers>
         </DictionaryProvider>
       </body>
     </html>
   )
 }
+
