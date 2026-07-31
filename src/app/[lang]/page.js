@@ -7,8 +7,8 @@ import SkillsSection from '@/components/sections/SkillsSection'
 import ProjectsSection from '@/components/sections/ProjectsSection'
 import ExperienceSection from '@/components/sections/ExperienceSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
-
 import ContactSection from '@/components/sections/ContactSection'
+import TestimonialsPopup from '@/components/TestimonialsPopup'
 
 export default async function HomePage({ params }) {
   const { lang } = await params
@@ -16,6 +16,7 @@ export default async function HomePage({ params }) {
 
   return (
     <>
+      <TestimonialsPopup />
       <HeroSection />
       <AboutSection />
       <StatsSection />
@@ -23,8 +24,8 @@ export default async function HomePage({ params }) {
       <ProjectsSection />
       <ExperienceSection />
       <TestimonialsSection />
-
       <ContactSection />
     </>
   )
 }
+
