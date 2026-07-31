@@ -155,14 +155,14 @@ export default function TestimonialsSection() {
 
   const { ref: sectionRef, inView } = useInView({ triggerOnce: true, threshold: 0.04 })
 
-  const [cur, setCur]           = useState(0)
-  const [direction, setDir]     = useState(1)
-  const [fullscreen, setFull]   = useState(false)
-  const [thumbHover, setHover]  = useState(null)
+  const [cur, setCur] = useState(0)
+  const [direction, setDir] = useState(1)
+  const [fullscreen, setFull] = useState(false)
+  const [thumbHover, setHover] = useState(null)
 
-  const thumbsRef      = useRef(null)
+  const thumbsRef = useRef(null)
   const activeThumbRef = useRef(null)
-  const hasMounted     = useRef(false)   
+  const hasMounted = useRef(false)
 
   useEffect(() => {
     if (!hasMounted.current) { hasMounted.current = true; return }
@@ -190,7 +190,7 @@ export default function TestimonialsSection() {
   useEffect(() => {
     const onKey = (e) => {
       if (fullscreen) return
-      if (e.key === 'ArrowLeft')  prev()
+      if (e.key === 'ArrowLeft') prev()
       if (e.key === 'ArrowRight') next()
     }
     window.addEventListener('keydown', onKey)
@@ -425,7 +425,10 @@ export default function TestimonialsSection() {
                     <img
                       src={src}
                       alt=""
+                      priority
                       aria-hidden="true"
+                      fetchPriority="high"
+                      quality={85}
                       loading="lazy"
                       decoding="async"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
